@@ -1,0 +1,17 @@
+$full-width: calc(100vw - 16px);
+$full-height: calc(100vh - 16px);
+
+$black: #000000;
+$white: #ffffff;
+
+$gray: #808080;
+$gray-light: #e7e7e7;
+$gray-white-1: #e6e5ea;
+$gray-white-2: #f3f2f5;
+
+$gray-desc: #adadad;
+$gray-blue-1: #dff0f8;
+$gray-blue-2: #bfe1f1;
+
+$tab-color: mix($gray-white-2, $white);
+$message-bg-color: mix($gray-light, $tab-color);

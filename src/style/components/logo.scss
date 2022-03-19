@@ -1,0 +1,11 @@
+.logo {
+  @include noSelect;
+  font-family: var(--main-logo-font-family);
+  font-size: 4rem;
+  font-weight: 600;
+  text-shadow: 0px 2px 3px #179cde;
+  //text-shadow: 0px 1px 0px #c0c0c0, 0px 2px 0px #b0b0b0, 0px 3px 0px #a0a0a0, 0px 4px 0px #909090, 0px 5px 5px rgba(0, 0, 0, 0.6);
+  color: #179cde;
+  //-webkit-text-stroke:.5px #c4ccd5;
+  //background-image:linear-gradient(135deg, red 141.4213562373095px, yellow 282.842712474619px);
+}

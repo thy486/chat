@@ -1,0 +1,46 @@
+.welcome {
+  font-family: var(--main-logo-font-family);
+
+  header {
+    text-align: left;
+    margin: 40vh 0 0 0;
+
+    .logo {
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: slide-in 1.5s forwards ease;
+      cursor: pointer;
+      cursor: hand;
+
+      &:hover, &:focus, &:active {
+        color: mix(white, #409eff);
+      }
+
+    }
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    left: 0%;
+    transform: translate(-50%, 25%);
+  }
+
+  25% {
+    left: 15%;
+    transform: translate(0%, 25%);
+  }
+
+  80% {
+    left: 65%;
+    transform: translate(-50%, -25%);
+    //transform: translateX(-50%);
+  }
+
+  100% {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
