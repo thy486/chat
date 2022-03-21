@@ -1,126 +1,118 @@
 <template>
   <div class="dialog">
     <div class="dialog-avatar">
-      <img :src="avatar" alt="头像加载失败"/>
+      <Avatar :url="props.avatar" :size="40" />
     </div>
-    <div class="dialog-body">
-      <div class="dialog-body-name">
-        good. mor
+    <div class="dialog-content">
+      <div class="dialog-content-body">
+        <div class="dialog-content-body-name">
+          <div class="dialog-content-name-inner">
+            {{ props.name }}
+          </div>
+        </div>
+        <div class="dialog-content-body-icon">
+
+        </div>
       </div>
-      <div class="dialog-body-detail">
-        描述东西描述东西描述东西描述东西描述东西描述东西描述东西描述东西
+      <div class="dialog-content-summary">
+        <div class="dialog-content-summary-inner">
+          {{ props.summary }}
+        </div>
       </div>
     </div>
     <div class="dialog-tail">
-      <div class="dialog-tail-lastDate">
-        02-26
+      <div class="dialog-tail-last-date">
+        11:32
       </div>
-      <div class="dialog-tail-unread"></div>
+      <div class="dialog-tail-unread">
+
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {toRef} from "vue";
+import Avatar from "./Avatar.vue";
 
-defineProps<{
-  avatar: string
+const props = defineProps<{
+  avatar: string,
+  name: string,
+  summary: string,
 }>()
-
 </script>
 
 <style scoped lang="scss">
-$main-height: 48px;
+@mixin flex-column {
+  @include flex;
+  flex-direction: column;
+}
 .dialog {
-  width: 100%;
-  height: $main-height;
-  @include noSelect;
+  @include flex;
+  height: 50px;
+
+  //overflow: hidden;
 
   .dialog-avatar {
-    margin: 0 5px 0 5px;
-    float: left;
-    //height: 50px;
-    height: 100%;
     @include box;
-    width: 40px;
-
-    img {
-      @include noSelect;
-      pointer-events: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    border-radius: 50%;
+    width: 50px;
+    padding-right: 5px;
   }
 
-  .dialog-body {
-    $height: 40px;
-    $padding-left: 8px;
-    $width: calc(100% - 40px - 10px - 13px - 2.1rem - $padding-left - 5px);
-    width: $width;
-    height: $height;
-    float: left;
+  .dialog-content {
+    flex: 1;
+    @include flex-column;
+    //align-items: flex-start;
 
-    @include flex;
-    text-align: left;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-family: argon Avenir, Helvetica, Arial, sans-serif;
-    //justify-content: flex-start;
-    padding: 4px 0 4px $padding-left;
+    // 省略号必要
+    overflow: hidden;
 
     & > * {
-      min-width: 0;
+      // 必要，固定宽度
+      //max-width: 100%;
+      text-align: left;
+    }
+
+    // 添加 div 否则 flex 会导致省略号不出现
+    .dialog-content-summary-inner, .dialog-content-name-inner {
+      line-height: 30px;
       @include hiddenOutText;
-      letter-spacing: 1px;
     }
 
-    .dialog-body-name {
-      font-size: 15px;
-      color: $black;
-      font-weight: 500;
-      height: calc($height / 2);
-      padding-bottom: 2px;
-    }
+    .dialog-content-body {
+      font-size: 18px;
+      height: 25px;
+      @include flex;
 
-    .dialog-body-detail {
-      padding-top: 2px;
-      font-size: 10px;
+      .dialog-content-body-name {
+        overflow: hidden;
+      }
+    }
+    .dialog-content-summary {
       color: $gray-desc;
-      height: calc($height / 2);
+      font-size: 12px;
+      flex: 1;
     }
   }
 
   .dialog-tail {
-    height: 100%;
-    margin: 0 10px 0 8px;
-    float: right;
-    color: $gray-desc;
-    @include box;
-    flex-wrap: wrap;
-    width: 2.1rem;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: right;
+    width: 40px;
+    @include flex-column;
+    //align-items: center;
+    justify-content: center;
+    padding-right: 5px;
 
-    & > * {
-      width: 100%;
-      // 就两个元素
-      $height: 24px;
-      @include verticalMiddleByLine(24px);
-    }
-
-    .dialog-tail-lastDate {
-      font-size: .8rem;
+    .dialog-tail-last-date {
+      height: 20px;
+      color: $gray-desc;
+      font-size: 12px;
+      @include verticalMiddleByLine(20px);
     }
 
     .dialog-tail-unread {
+      @include verticalMiddleByLine(20px);
+      flex: 1;
     }
   }
-
-  @include clearfix;
 }
 
 </style>

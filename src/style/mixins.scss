@@ -43,8 +43,12 @@
 }
 
 @mixin flex {
-  display: -webkit-flex;
-  display: flex;
+  display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+  display: -moz-box; /* Firefox 17- */
+  display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+  display: -moz-flex; /* Firefox 18+ */
+  display: -ms-flexbox; /* IE 10 */
+  display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
 }
 
 // flex布局 盒子
@@ -59,6 +63,11 @@
 @mixin verticalMiddleByLine($height) {
   height: $height;
   line-height: $height;
+}
+
+@mixin fixedHeight($height) {
+  min-height: $height;
+  max-height: $height;
 }
 
 @mixin bubble($bg-color, $font-color: $gray-desc) {
@@ -94,8 +103,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    cursor: pointer;
-    cursor: hand;
+    @include canClick;
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
@@ -114,4 +122,17 @@
     overflow: auto;
     overflow: overlay;
   }
+}
+
+@mixin default-padding-r-l {
+  padding: 0 $default-pad 0 $default-pad;
+}
+
+@mixin default-padding-t-b {
+  padding: $default-pad 0 $default-pad 0;
+}
+
+@mixin canClick {
+  cursor: pointer;
+  cursor: hand;
 }

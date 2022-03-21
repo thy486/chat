@@ -1,6 +1,6 @@
 <template>
   <div class="avatar-box">
-    <img :src="url" alt="fail"/>
+    <img :src="props.url" alt="fail"/>
   </div>
 </template>
 

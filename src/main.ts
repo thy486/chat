@@ -4,6 +4,7 @@ import router from './router'
 import { createPinia } from 'pinia'
 import Antd from 'ant-design-vue';
 import 'normalize.css/normalize.css'
+// import '@vant/touch-emulator';
 
 const app = createApp(App)
 

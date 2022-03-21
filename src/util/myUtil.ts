@@ -52,10 +52,10 @@ export function generatorAvatar(username?: string, size?: number, bgColor?: stri
 }
 
 export function isPngSize(base64: string) {
-    return base64.substring(0,22) === 'data:image/png;base64,'
+    return base64.substring(0, 22) === 'data:image/png;base64,'
 }
 
-export function getPngSize(base64: string): {width: number, height: number} {
+export function getPngSize(base64: string): { width: number, height: number } {
     //确认处理的是png格式的数据
     if (isPngSize(base64)) {
         // base64 是用四个字符来表示3个字节
@@ -68,10 +68,10 @@ export function getPngSize(base64: string): {width: number, height: number} {
             nums.push(base64Characters.indexOf(c));
         }
         const bytes = [];
-        for(let i = 0; i < nums.length; i += 4) {
-            bytes.push((nums[i] << 2) + (nums[i+1] >> 4));
-            bytes.push(((nums[i+1] & 15) << 4) + (nums[i+2] >> 2));
-            bytes.push(((nums[i+2] & 3) << 6) + nums[i+3]);
+        for (let i = 0; i < nums.length; i += 4) {
+            bytes.push((nums[i] << 2) + (nums[i + 1] >> 4));
+            bytes.push(((nums[i + 1] & 15) << 4) + (nums[i + 2] >> 2));
+            bytes.push(((nums[i + 2] & 3) << 6) + nums[i + 3]);
         }
         const width = (bytes[1] << 24) + (bytes[2] << 16) + (bytes[3] << 8) + bytes[4];
         const height = (bytes[5] << 24) + (bytes[6] << 16) + (bytes[7] << 8) + bytes[8];
@@ -81,6 +81,32 @@ export function getPngSize(base64: string): {width: number, height: number} {
         };
     }
     throw Error('unsupported image type');
+}
+
+export function formatDate(date: Date, fmt: string): string {
+    const n = date, l: { [key: string]: number } = {
+        "M+": n.getMonth() + 1,
+        "d+": n.getDate(),
+        "D+": n.getDate(),
+        "h+": n.getHours(),
+        "H+": n.getHours(),
+        "m+": n.getMinutes(),
+        "s+": n.getSeconds(),
+        "w+": n.getDay(),
+        "q+": Math.floor((n.getMonth() + 3) / 3),
+        "S+": n.getMilliseconds(),
+    };
+    let res = fmt
+    res = res.replace(/(y+)/i, (_, year: string) => {
+        return n.getFullYear().toString().substring(4 - year.length)
+    })
+    for (let k in l) {
+        res = res.replace(new RegExp(`(${k})`), (_, arg1: string) => {
+            let a = "S+" === k ? "000" : "00";
+            return 1 == arg1.length ? l[k].toString() : (`${a}${l[k]}`).substring(l[k].toString().length)
+        })
+    }
+    return res
 }
 
 export default {

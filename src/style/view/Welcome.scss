@@ -11,8 +11,7 @@
       left: 50%;
       transform: translateX(-50%);
       animation: slide-in 1.5s forwards ease;
-      cursor: pointer;
-      cursor: hand;
+      @include canClick;
 
       &:hover, &:focus, &:active {
         color: mix(white, #409eff);
@@ -24,7 +23,7 @@
 
 @keyframes slide-in {
   0% {
-    left: 0%;
+    left: 0;
     transform: translate(-50%, 25%);
   }
 

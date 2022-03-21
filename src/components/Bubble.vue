@@ -1,85 +1,69 @@
 <template>
-  <div class="bubble-message">
-    <div class="bubble-inner-text">
+  <div class="bubble">
+    <div class="bubble-text">
       <slot></slot>
     </div>
   </div>
-  <!--  <div class="bubble-message-footer"></div>-->
 </template>
 
-<script setup lang="ts">
-import {onMounted, reactive, ref, toRef} from "vue";
-import {getPngSize, isPngSize} from "../util/myUtil";
-import ImageUtil from "../util/imageUtil";
-import {sys_store, user_diy_store} from "../store";
-import {storeToRefs} from "pinia";
+<script lang="ts" setup>
 import {Bubble as BubbleType} from "../type/Diy";
-
-const diyStore = user_diy_store(), sysStore = sys_store()
+import {computed, ref, toRef} from "vue";
 
 const props = defineProps<{
   size: number,
-  bubble: BubbleType
+  // bubble: BubbleType
 }>()
 
-const bubble = toRef(props, 'bubble')
-
-const borderWidth = ref(560 * 5 / 14)
-const zoom = 0.1 * props.size / 30
-// console.log(borderWidth)
-onMounted(async () => {
-  // console.log(borderWidth)
-})
+const _height = toRef(props, 'size')
+const height = ref(_height.value)
+const width = computed(() => height.value / 7 * 8)
 </script>
 
 <style scoped lang="scss">
-.bubble-reverse {
-  left: v-bind("`${borderWidth * zoom}px`");
+$width: v-bind("`${width}px`");
+$height: v-bind("`${height}px`");
+.bubble {
+  width: fit-content;
+  position: relative;
+  display: inline-block;
+  margin: $width $height $width $height;
 
-  &::after {
-    transform: scaleX(-1);
+  .bubble-text {
+    position: relative;
+    display: inline-block;
+    min-width: v-bind("`${width * 0.5}px`");
+    min-height: $height;
+    z-index: 99;
+
+    &::before {
+      content: "";
+      position: absolute;
+      border-style: solid;
+      width: 100%;
+      height: 100%;
+      top: v-bind("`${-height * 1.25}px`");
+      left: v-bind("`${-width * 0.8}px`");
+      //传入640 * 560的图片
+      border-image-source: url(https://avatar-img.wuhan716.com/dress/%E7%94%9C%E7%94%9C%E5%85%94%E7%86%8A%E6%81%8B.png);
+      border-image-slice: 200 200 200 200 fill;
+      border-image-width: $width $height $width $height;
+      border-width: $width $height $width $height;
+      z-index: -1;
+      transform: scaleX(-1);
+    }
+  }
+
+  .bubble-box {
+
   }
 }
-
-.bubble-message {
-  position: relative;
-  display: block;
-  width: fit-content;
-  min-width: 1em;
-  min-height: 1em;
-  top: v-bind("`${borderWidth * zoom}px`");
-  right: v-bind("`${borderWidth * zoom}px`");
-
-  &:before {
-    content: "";
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    zoom: v-bind(zoom);
-    // 火狐不正常zoom
-    -moz-transform: scale(0%);
-    //-moz-transform-origin:bottom right;
-
-    top: v-bind("`-${borderWidth}px`");
-    left: v-bind("`-${borderWidth}px`");;
-    border-style: solid;
-    border-width: v-bind("`${borderWidth}px`");
-    border-image-slice: v-bind(borderWidth) v-bind(borderWidth) v-bind(borderWidth) v-bind(borderWidth) fill;
-    border-image-repeat: repeat;
-    border-image-source: v-bind("`url('${bubble.url}')`");
-    word-break: break-word;
-    //transform: scaleX(-1);
-  }
-
-  .bubble-inner-text {
-    position: relative;
-    z-index: 99;
-    //text-align: center;
+.special {
+  .bubble-text {
+    &::before {
+      left: v-bind("`${-width}px`");
+      transform: scaleX(1);
+    }
   }
 }
 </style>

@@ -2,6 +2,7 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers'
+// import styleImport, { VantResolve } from 'vite-plugin-style-import';
 import {resolve} from "path";
 
 function pathResolve(dir: string): string {
@@ -17,6 +18,9 @@ export default defineConfig({
                 AntDesignVueResolver(),
             ],
         }),
+        // styleImport({
+        //     resolves: [VantResolve()],
+        // }),
     ],
     resolve: {
         extensions: ['.js', '.ts', '.d.ts'],

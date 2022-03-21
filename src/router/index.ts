@@ -14,7 +14,7 @@ export default createRouter({
         }, {
             name: "chat",
             path: "/chat",
-            component: () => import('@/view/Chat.vue'),
+            component: () => import('@/view/ChatRoom.vue'),
         }, {
             name: "test",
             path: "/test",

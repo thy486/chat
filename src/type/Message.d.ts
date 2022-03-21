@@ -34,7 +34,6 @@ export interface Message {
     sendDate?: string,
     // 发送时间的时间戳
     timestamp: number,
-
     message: MessageMap,
 
     status: MessageStatus,

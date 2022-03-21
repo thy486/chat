@@ -16,11 +16,11 @@ export default {
 
 <style scoped lang="scss">
 .t-button {
-  width: 20px;
+  width: 30px;
   height: 20px;
   display: block;
-  cursor: pointer;
-  cursor: hand;
+  text-align: center;
+  @include canClick;
 
   .t-button-el {
     display: inline-block;
@@ -30,6 +30,8 @@ export default {
   }
 
   &:hover, &:focus, &:active {
+    transform: scale(1.1);
+    border-radius: 7.5px;
     background: var(--gray-1);
   }
 

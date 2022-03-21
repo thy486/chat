@@ -5,7 +5,7 @@
         <div style="height: 30px; line-height: 30px;">页头</div>
       </slot>
     </div>
-    <div class="t-transfer-body" @scroll="test">
+    <div class="t-transfer-body">
       <slot></slot>
     </div>
     <div class="t-transfer-footer">
