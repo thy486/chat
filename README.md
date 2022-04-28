@@ -45,4 +45,4 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 * B 样式的 `overflow: hidden;`  的属性的是相对于C来设置的。
 * 踩坑: <font color="red">当 A 样式设置  </font>`align-items: flex-start;`<font color="red"> 属性时，B样式还需要搭配</font>  `max-width: 100%;` <font color="red">否则省略号消失。这个属性的是相对于A来设置的。</font>
-
+* `max-width: 100%;` 不生效则可以尝试 `width: 0;`
